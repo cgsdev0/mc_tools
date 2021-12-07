@@ -4,18 +4,21 @@ PATH=$PATH:$HOME/bin
 PATH=$PATH:/usr/local/bin
 
 alert_and_exit() {
+    echo "$@"
     alert "Minecraft backup failed!" "$@"
     exit 1
 }
 
 if [ -z "$1" ]; then
-    echo "Specify a world to backup."
-    exit 1
+    alert_and_exit "no world specified"
 fi
 
 if [ -z "$2" ]; then
-    echo "Specify the port to use for rcon."
-    exit 1
+    alert_and_exit "no port specified"
+fi
+
+if [ ! -f "$HOME/.rcon_password" ]; then
+    alert_and_exit "no rcon password file found"
 fi
 
 RCON="$HOME/go/bin/rcon-cli --port "$2" --password $(cat $HOME/.rcon_password)"
