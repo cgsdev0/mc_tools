@@ -72,3 +72,6 @@ b2_result=$(b2 upload-file --noProgress \
 code=$?
 action=$(echo "$b2_result" | tail +3 | jq -r '.action')
 (test $code && [[ "$action" == "upload" ]]) || alert_and_exit "$b2_result"
+
+# Clean up
+rm "backups/$1-backup-cloud.tar.gz"

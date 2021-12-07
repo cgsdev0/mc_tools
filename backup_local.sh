@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fail if anything goes wrong
-set -ex
+set -e
 
 if [ -z "$1" ]; then
     echo "Specify a world to backup."
