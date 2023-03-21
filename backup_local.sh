@@ -55,6 +55,6 @@ rsync -a -q \
 tar -czf "backups/$1-backup-$(date +%m-%d-%y_%H:%M).tar.gz" ".$1-backup"
 
 # Delete backups older than 24 hours
-find $HOME/minecraft/backups -type f -mtime +1 -exec rm -f {} \;
+find $HOME/minecraft/backups -type f -mmin +720 -delete;
 
 
