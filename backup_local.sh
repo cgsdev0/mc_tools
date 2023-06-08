@@ -13,9 +13,9 @@ if [ -z "$2" ]; then
     exit 1
 fi
 
-RCON="$HOME/go/bin/rcon-cli --port "$2" --password $(cat $HOME/.rcon_password)"
+RCON="/usr/bin/rcon -a 127.0.0.1:$2 -p $(cat /home/minecraft/.rcon_password) -t rcon"
 
-cd $HOME/minecraft
+cd /home/minecraft/servers
 
 function cleanup() {
     rv=$?
@@ -55,6 +55,6 @@ rsync -a -q \
 tar -czf "backups/$1-backup-$(date +%m-%d-%y_%H:%M).tar.gz" ".$1-backup"
 
 # Delete backups older than 24 hours
-find $HOME/minecraft/backups -type f -mmin +720 -delete;
+find /home/minecraft/backups -type f -mmin +720 -delete;
 
 

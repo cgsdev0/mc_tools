@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PATH=$PATH:$HOME/bin
+PATH=$PATH:/home/sarah/bin
 PATH=$PATH:/usr/local/bin
 
 alert_and_exit() {
@@ -17,13 +17,13 @@ if [ -z "$2" ]; then
     alert_and_exit "no port specified"
 fi
 
-if [ ! -f "$HOME/.rcon_password" ]; then
+if [ ! -f "/home/minecraft/.rcon_password" ]; then
     alert_and_exit "no rcon password file found"
 fi
 
-RCON="$HOME/go/bin/rcon-cli --port "$2" --password $(cat $HOME/.rcon_password)"
+RCON="/usr/bin/rcon -a 127.0.0.1:$2 -p $(cat /home/minecraft/.rcon_password) -t rcon"
 
-cd $HOME/minecraft
+cd /home/minecraft/servers
 
 function cleanup() {
     rv=$?
